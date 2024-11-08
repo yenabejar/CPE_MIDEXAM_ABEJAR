@@ -1,0 +1,67 @@
+#installing elasticsearch and influxdb for 192.168.56.129
+###
+#---
+# - name: configure elasticsearch
+#   hosts: workstation
+#   user: ubuntu
+#   become_method: sudo
+#   become: true
+#   gather_facts: false
+
+#  tags:
+#     - config
+#     - configure
+
+#   tasks:
+
+#   - name: update cache and ignore errors in case of problems
+#       become: yes
+#       apt: update_cache=yes
+#       ignore_errors: yes
+
+#   - name: install nginx
+#        become: yes
+#        apt:
+#          name: nginx
+#          purge: yes
+#          state: present
+
+#   - name: install java 11
+#        become: yes
+#        apt:
+#          name: openjdk-11-jdk
+#          purge: yes
+#          state: present
+
+#  - name: set java home
+#        shell: sudo echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> /etc/environment
+
+#     - name: export Java home
+#        shell: export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+# - name: Download ElasticSearch packag
+---
+ - name: install elasticsearch
+   apt:
+     name: elasticsearch
+     state: present
+   when: ansible_distribution == "Ubuntu"
+   notify: restart elasticsearch
+
+#    - handlers:
+#        - name: restart elasticsearch
+#          service: restarted
+
+ - name: install influxdb
+   apt:
+     name: influxdb
+     state: present
+   when: ansible_distribution == "Ubuntu"
+   notify: start influxdb
+
+#    - handlers:
+#        - name: start influxdb
+#          service:
+#            name: influxdb
+#            state: started
+

@@ -1,0 +1,26 @@
+---
+ - name: Install Kibana
+   apt:
+     name: kibana
+     state: present
+   when: ansible_distribution == "Ubuntu"
+   notify: restart kibana
+
+#   - handlers:
+#     - name: restart kibana
+#       service:
+#        name: kibana
+#        state: restarted
+
+ - name: Install Grafana
+   apt:
+     name: grafana
+     state: present
+   when: ansible_distribution == "Ubuntu"
+   notify: start grafana
+
+#    - handlers:
+#      - name: start grafana
+#        service:
+#         name: kibana
+#        state: started

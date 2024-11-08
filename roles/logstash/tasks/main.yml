@@ -1,0 +1,27 @@
+#installing logstash and prometheus in 192.168.56.130
+---
+ - name: Install Logstash
+   apt:
+     name: logstash
+     state: present
+   when: ansible_distribution == "Ubuntu"
+   notify: restart logstash
+
+#    - handlers:
+#     - name: restart logstash
+#        service:
+#         name: logstash
+#         state: restarted
+
+ - name: install prometheus
+   apt:
+     name: prometheus
+     state: present
+   when: ansible_distribution == "Ubuntu"
+   notify: start prometheus
+
+#    - handlers:
+#      - name: start prometheus
+#        service:
+#         name: prometheus
+#        state: started

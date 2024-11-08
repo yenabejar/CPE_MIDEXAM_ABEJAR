@@ -1,0 +1,36 @@
+#installing nagios and lampstack in 192.168.56.132
+---
+ - name: install nagios
+   apt:
+     name:
+      - nagios
+      - nagios-plugins-all
+   state: present
+   when: ansible_distribution == "CentOS"
+
+ - name: start and enable nagios service
+   service:
+    name: nagios
+    state: started
+    enabled: true
+
+ - name: install httpd apache and php
+   apt:
+     name:
+      - httpd
+      - php
+   state: present
+   when: ansible_distribution == "CentOS"
+   notify: restart apache
+
+#    - handlers:
+#      - name: restart apache
+#        service:
+#         name: httpd
+#         state: restarted
+#        when: ansible_distribution == "CentOS"
+#      - name: restart apache
+#        service:
+#         name: apache2
+#         state: restarted
+#       when: ansible_distribution == "CentOS"
