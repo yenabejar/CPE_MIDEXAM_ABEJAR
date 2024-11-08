@@ -1,0 +1,11 @@
+[workstations]
+192.168.56.133
+
+[server_one]
+192.168.56.127
+
+[server_two]
+192.168.56.130
+
+[server_centos]
+192.168.56.132
